@@ -1,22 +1,21 @@
 ﻿using System;
-using VehicleCheck.Models;
+using System.Linq;
 using VehicleCheck.ViewModels;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace VehicleCheck
+namespace VehicleCheck.Views
 {
     public sealed partial class MainPage : Page
     {
-        private readonly VehicleViewViewModel _vvvm;
+        private readonly MainViewViewModel _mvvm;
 
         public MainPage()
         {
             InitializeComponent();
 
-            _vvvm = (VehicleViewViewModel) DataContext;
+            _mvvm = (MainViewViewModel) DataContext;
         }
 
         private void OnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -33,10 +32,23 @@ namespace VehicleCheck
             GridView.SelectedItem = null;
         }
 
-        private void SignIn_OnClick(object sender, RoutedEventArgs e)
-        {//todo fetch vehicles
-            _vvvm.Cοnnected = true;
+        private async void SignIn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (UsernameTextBox.Text == "")
+                return;
 
+            var username = UsernameTextBox.Text;
+            var password = PasswordTextBox.Password;
+
+            //loading
+            App.User = (await App.SyncUsers.Where(x => x.Username == username && x.Password == password).ToListAsync()).FirstOrDefault();
+
+            if(App.User != null)
+                await _mvvm.FetchVehicleData();
+            else
+            {
+                //kodikas efae akuro
+            }
         }
 
         private void SignUp_OnClick(object sender, RoutedEventArgs e)
@@ -61,7 +73,7 @@ namespace VehicleCheck
 
             if (result != ContentDialogResult.Primary)
             {
-                _vvvm.Cοnnected = false;
+                _mvvm.Cοnnected = false;
             }
         }
 

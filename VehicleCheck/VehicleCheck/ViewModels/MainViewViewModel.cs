@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using VehicleCheck.Models;
 
 namespace VehicleCheck.ViewModels
 {
-    public class VehicleViewViewModel : INotifyPropertyChanged
+    public class MainViewViewModel : INotifyPropertyChanged
     {
         private bool _cοnnected;
         private ObservableCollection<Vehicle> _vehicles;
@@ -29,9 +31,10 @@ namespace VehicleCheck.ViewModels
             }
         }
 
-        public VehicleViewViewModel()
+        public async Task FetchVehicleData()
         {
-            Vehicles = App.Vehicles;
+            Vehicles = new ObservableCollection<Vehicle>(await App.SyncVehicles.Where(x => x.UserId == App.User.Id).ToListAsync());
+            Cοnnected = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,5 +44,4 @@ namespace VehicleCheck.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }

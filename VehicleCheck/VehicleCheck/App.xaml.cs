@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using VehicleCheck.Models;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -10,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.WindowsAzure.MobileServices;
+using VehicleCheck.Views;
 
 namespace VehicleCheck
 {
@@ -19,7 +18,8 @@ namespace VehicleCheck
 
         public static IMobileServiceTable<User> SyncUsers { get; set; }
         public static IMobileServiceTable<Vehicle> SyncVehicles { get; set; }
-        public static MobileServiceCollection<Vehicle, Vehicle> Vehicles { get; set; }
+
+        public static User User { get; set; }
 
         public App()
         {
@@ -35,44 +35,37 @@ namespace VehicleCheck
             {
                 Client = new MobileServiceClient("https://vehiclecheck.azurewebsites.net");
 
-                SyncVehicles = Client.GetTable<Vehicle>();
                 SyncUsers = Client.GetTable<User>();
-                await VehicleFetchData();
+                SyncVehicles = Client.GetTable<Vehicle>();
+                /*
+                var user = new User
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    Username = "John",
+                    Password = "1234"
+                };
+                await SyncUsers.InsertAsync(user);
+
+                var vehicle = new Vehicle
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    Name = "Mazda",
+                    UserId = user.Id,
+                    LicensePlate = "rjng34g",
+                    Insurance = DateTime.Now,
+                    Tax = DateTime.Now,
+                    Mot = DateTime.Now,
+                    GasEmissionsCard = DateTime.Now
+                };
+                await SyncVehicles.InsertAsync(vehicle);
+                */
             }
             catch
             {
                 Console.WriteLine("Database Connection Error!");
             }
         }
-
-        public async Task VehicleFetchData()
-        {/*
-            var user = new User
-            {
-                Id = Guid.NewGuid().ToString("N"),
-                Username = "John"
-            };
-            await SyncUsers.InsertAsync(user);
-
-            var vehicle = new Vehicle
-            {
-                Id = Guid.NewGuid().ToString("N"),
-                Name = "Αμαξι",
-                UserId = user.Id,
-                LicensePlate = "rjng34g",
-                Insurance = DateTime.Now,
-                Tax = DateTime.Now,
-                Mot = DateTime.Now,
-                GasEmissionsCard = DateTime.Now
-
-            };
-            await SyncVehicles.InsertAsync(vehicle);*/
-
-            Vehicles = await SyncVehicles.ToCollectionAsync();
-            var mpla = await SyncUsers.ToCollectionAsync();
-            var m = 1;
-        }
-
+         
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;

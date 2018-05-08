@@ -8,7 +8,6 @@ namespace VehicleCheck.Models
     {
         private string _id;
         private string _name;
-        private User _user;
         private string _userId;
         private string _licensePlate;
         private DateTime _insurance;
@@ -34,16 +33,6 @@ namespace VehicleCheck.Models
             {
                 _name = value;
                 OnPropertyChanged("Name");
-            }
-        }
-
-        public User User
-        {
-            get { return _user; }
-            set
-            {
-                _user = value;
-                OnPropertyChanged("User");
             }
         }
 
