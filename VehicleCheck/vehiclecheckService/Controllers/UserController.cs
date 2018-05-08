@@ -4,17 +4,17 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
-using vehiclecheckService.DataObjects;
-using vehiclecheckService.Models;
+using VehicleCheckService.DataObjects;
+using VehicleCheckService.Models;
 
-namespace vehiclecheckService.Controllers
+namespace VehicleCheckService.Controllers
 {
     public class UserController : TableController<User>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            vehiclecheckContext context = new vehiclecheckContext();
+            VehicleCheckContext context = new VehicleCheckContext();
             DomainManager = new EntityDomainManager<User>(context, Request);
         }
 

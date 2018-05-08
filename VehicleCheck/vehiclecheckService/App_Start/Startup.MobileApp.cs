@@ -4,10 +4,10 @@ using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using vehiclecheckService.Models;
+using VehicleCheckService.Models;
 using Owin;
 
-namespace vehiclecheckService
+namespace VehicleCheckService
 {
     public partial class Startup
     {
@@ -18,7 +18,7 @@ namespace vehiclecheckService
 
             new MobileAppConfiguration().UseDefaultConfiguration().ApplyTo(config);
 
-            Database.SetInitializer(new vehiclecheckInitializer());
+            Database.SetInitializer(new VehicleCheckInitializer());
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
@@ -36,7 +36,7 @@ namespace vehiclecheckService
         }
     }
 
-    public class vehiclecheckInitializer : CreateDatabaseIfNotExists<vehiclecheckContext>
+    public class VehicleCheckInitializer : CreateDatabaseIfNotExists<VehicleCheckContext>
     {
 
     }

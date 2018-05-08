@@ -1,9 +1,9 @@
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(vehiclecheckService.Startup))]
+[assembly: OwinStartup(typeof(VehicleCheckService.Startup))]
 
-namespace vehiclecheckService
+namespace VehicleCheckService
 {
     public partial class Startup
     {

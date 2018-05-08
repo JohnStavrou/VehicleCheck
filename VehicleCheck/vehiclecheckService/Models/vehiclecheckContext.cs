@@ -2,15 +2,15 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.Azure.Mobile.Server.Tables;
-using vehiclecheckService.DataObjects;
+using VehicleCheckService.DataObjects;
 
-namespace vehiclecheckService.Models
+namespace VehicleCheckService.Models
 {
-    public class vehiclecheckContext : DbContext
+    public class VehicleCheckContext : DbContext
     {
         private const string connectionStringName = "Name=MS_TableConnectionString";
 
-        public vehiclecheckContext() : base(connectionStringName)
+        public VehicleCheckContext() : base(connectionStringName)
         {
 
         }

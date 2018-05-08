@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 
-namespace vehiclecheckService.DataObjects
+namespace VehicleCheckService.DataObjects
 {
     public class User : EntityData
     {
