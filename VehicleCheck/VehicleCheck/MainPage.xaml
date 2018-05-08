@@ -1,0 +1,109 @@
+﻿<Page
+    x:Class="VehicleCheck.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="using:VehicleCheck.Converters" 
+    xmlns:ViewModels="using:VehicleCheck.ViewModels"
+    xmlns:Models="using:VehicleCheck.Models"
+    KeyDown="OnKeyDown"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Converters:ConnectedToVisibleConverter x:Name="ConnectedToVisibleConverter"/>
+        <Converters:DateToFormattedDateConverter x:Name="DateToFormattedDateConverter"/>
+        <Converters:DateToColorConverter x:Name="DateToColorConverter"/>
+        <Converters:InvConnectedToVisibleConverter x:Name="InvConnectedToVisibleConverter"/>
+    </Page.Resources>
+    
+    <Page.DataContext>
+        <ViewModels:VehicleViewViewModel x:Name="VehicleViewViewModel"/>
+    </Page.DataContext>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <Grid Visibility="{Binding Cοnnected, Converter={StaticResource InvConnectedToVisibleConverter}}">
+            <Button Content="Sign Up" VerticalAlignment="Top" HorizontalAlignment="Right" Click="SignUp_OnClick"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <Grid Margin="0, 2">
+                    <TextBlock Text="Username" VerticalAlignment="Center"/>
+                    <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Right" Width="200"/>
+                </Grid>
+                <Grid Margin="0, 2">
+                    <TextBlock Text="Password" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Right" Width="200"/>
+                </Grid>
+                <Button Content="Sign In" Margin="0, 2" HorizontalAlignment="Stretch" Click="SignIn_OnClick"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Visibility="{Binding Cοnnected, Converter={StaticResource ConnectedToVisibleConverter}}" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button Content="Add Vehicle" HorizontalAlignment="Left" Click="Add_OnClick"/>
+                <Button Content="Sign Out" HorizontalAlignment="Right" Click="SignOut_OnClick"/>
+            </Grid>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch">
+                <GridView x:Name="GridView" ItemsSource="{x:Bind VehicleViewViewModel.Vehicles}" FontSize="20" Tapped="GridView_Tapped" MaxWidth="1200">
+                    <GridView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="License Plate" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="Insurance" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="Tax" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="MOT" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="5" Text="Gas Emissions Card" TextAlignment="Center"/>
+                        </Grid>
+                    </GridView.Header>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="Models:Vehicle">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Width="200" Text="{x:Bind Name}" FontWeight="Bold" TextAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Width="200" Text="{x:Bind LicensePlate}" FontWeight="Bold" TextAlignment="Center"/>
+                                <Border Grid.Column="2" Width="200" Background="{Binding Insurance, Converter={StaticResource DateToColorConverter}}">
+                                    <TextBlock Text="{Binding Insurance, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="3" Width="200" Background="{Binding Tax, Converter={StaticResource DateToColorConverter}}">
+                                    <TextBlock Text="{Binding Tax, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="4" Width="200" Background="{Binding Mot, Converter={StaticResource DateToColorConverter}}">
+                                    <TextBlock Text="{Binding Mot, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="5" Width="200" Background="{Binding GasEmissionsCard, Converter={StaticResource DateToColorConverter}}">
+                                    <TextBlock Text="{Binding GasEmissionsCard, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Edit"/>
+                        </MenuFlyout>
+                    </GridView.ContextFlyout>                
+                </GridView>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
