@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 using VehicleCheck.Models;
 using Windows.ApplicationModel;
@@ -45,7 +46,10 @@ namespace VehicleCheck
 
         public static string Hash(string password)
         {
-            return Encoding.UTF8.GetBytes(password).ToString();
+            var sb = new StringBuilder();
+            foreach (var b in SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(password)))
+                sb.Append(b.ToString("x2"));
+            return sb.ToString();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
