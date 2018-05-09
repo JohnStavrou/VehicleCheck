@@ -20,6 +20,7 @@ namespace VehicleCheck
         public static IMobileServiceTable<Vehicle> SyncVehicles { get; set; }
 
         public static User User { get; set; }
+        public static Vehicle Vehicle { get; set; }
 
         public App()
         {

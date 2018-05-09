@@ -29,7 +29,10 @@
 
             <Grid Grid.Row="0">
                 <Button Content="Add Vehicle" HorizontalAlignment="Left" Click="AddVehicle_OnClick"/>
-                <Button Content="Sign Out" HorizontalAlignment="Right" Click="SignOut_OnClick"/>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Content="Settings" Margin="5, 0"/>
+                    <Button Content="Sign Out" Click="SignOut_OnClick"/>
+                </StackPanel>
             </Grid>
 
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

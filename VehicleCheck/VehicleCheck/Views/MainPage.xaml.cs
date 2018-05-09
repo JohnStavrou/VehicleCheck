@@ -9,7 +9,6 @@ namespace VehicleCheck.Views
 {
     public sealed partial class MainPage
     {
-        private Vehicle _vehicle;
         private readonly MainViewViewModel _mvvm;
 
         public MainPage()
@@ -27,10 +26,15 @@ namespace VehicleCheck.Views
             _mvvm.Loading = false;
         }
 
+        private void Grid_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            GridView.SelectedItem = null;
+        }
+
         private void GridView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            _vehicle = (Vehicle) GridView.SelectedItem;
-            if (_vehicle == null)
+            App.Vehicle = (Vehicle) GridView.SelectedItem;
+            if (App.Vehicle == null)
                 return;
 
             var item = (UIElement) e.OriginalSource;
@@ -60,14 +64,14 @@ namespace VehicleCheck.Views
 
         private void Edit_OnClick(object sender, RoutedEventArgs e)
         {
-            GridView.SelectedItem = null;
+            Frame.Navigate(typeof(EditVehicle));
         }
 
         private async void Delete_OnClick(object sender, RoutedEventArgs e)
         {
             var result = await new ContentDialog
             {
-                Content = "Are you sure you want delete vehicle " + _vehicle.Name + "?",
+                Content = "Are you sure you want delete vehicle " + App.Vehicle.Name + "?",
                 CloseButtonText = "No",
                 PrimaryButtonText = "Yes"
             }.ShowAsync();
@@ -75,15 +79,10 @@ namespace VehicleCheck.Views
             if (result == ContentDialogResult.Primary)
             {
                 _mvvm.Loading = true;
-                await App.SyncVehicles.DeleteAsync(_vehicle);
-                _mvvm.Vehicles.Remove(_vehicle);
+                await App.SyncVehicles.DeleteAsync(App.Vehicle);
+                _mvvm.Vehicles.Remove(App.Vehicle);
                 _mvvm.Loading = false;
             }
-            GridView.SelectedItem = null;
-        }
-
-        private void Grid_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
             GridView.SelectedItem = null;
         }
     }
