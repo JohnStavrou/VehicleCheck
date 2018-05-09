@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
     <Compile Include="Converters\DateToColorConverter.cs" />
+    <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\InvBoolToVisibleConverter.cs" />
     <Compile Include="Converters\DateToFormattedDateConverter.cs" />
     <Compile Include="Views\EditVehicle.xaml.cs">

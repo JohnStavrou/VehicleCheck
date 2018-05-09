@@ -13,6 +13,7 @@
         <converters:BoolToVisibleConverter x:Name="BoolToVisibleConverter"/>
         <converters:DateToColorConverter x:Name="DateToColorConverter"/>
         <converters:DateToFormattedDateConverter x:Name="DateToFormattedDateConverter"/>
+        <converters:IntToStringConverter x:Name="IntToStringConverter"/>
         <converters:InvBoolToVisibleConverter x:Name="InvBoolToVisibleConverter"/>
     </Page.Resources>
     
@@ -71,7 +72,13 @@
                                 <TextBlock Grid.Column="0" Width="200" Text="{x:Bind Name}" FontWeight="Bold" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Width="200" Text="{x:Bind LicensePlate}" FontWeight="Bold" TextAlignment="Center"/>
                                 <Border Grid.Column="2" Width="200" Background="{Binding Insurance, Converter={StaticResource DateToColorConverter}}">
-                                    <TextBlock Text="{Binding Insurance, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Insurance, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Basetime, Converter={StaticResource IntToStringConverter}}"/>
+                                            <TextBlock Text="remaining"/>
+                                        </StackPanel>
+                                    </StackPanel>
                                 </Border>
                                 <Border Grid.Column="3" Width="200" Background="{Binding Tax, Converter={StaticResource DateToColorConverter}}">
                                     <TextBlock Text="{Binding Tax, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>

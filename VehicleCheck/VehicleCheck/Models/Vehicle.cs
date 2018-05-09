@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Windows.UI.Xaml;
 using Newtonsoft.Json;
 
 namespace VehicleCheck.Models
@@ -14,6 +15,8 @@ namespace VehicleCheck.Models
         private DateTimeOffset _tax;
         private DateTimeOffset _mot;
         private DateTimeOffset _gasEmissionsCard;
+        private DispatcherTimer _timer;
+        private int _basetime;
 
         [JsonProperty("id")]
         public string Id
@@ -93,6 +96,28 @@ namespace VehicleCheck.Models
             {
                 _gasEmissionsCard = value;
                 OnPropertyChanged("GasEmissionsCard");
+            }
+        }
+
+        [JsonIgnore]
+        public DispatcherTimer Timer
+        {
+            get { return _timer; }
+            set
+            {
+                _timer = value;
+                OnPropertyChanged("Timer");
+            }
+        }
+
+        [JsonIgnore]
+        public int Basetime
+        {
+            get { return _basetime; }
+            set
+            {
+                _basetime = value;
+                OnPropertyChanged("Basetime");
             }
         }
 
