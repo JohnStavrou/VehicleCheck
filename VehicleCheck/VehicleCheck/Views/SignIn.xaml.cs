@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace VehicleCheck.Views
 {
-    public sealed partial class SignIn : Page
+    public sealed partial class SignIn
     {
         private readonly MainViewViewModel _mvvm;
 
@@ -22,7 +22,7 @@ namespace VehicleCheck.Views
             if (UsernameTextBox.Text == "" || PasswordTextBox.Password == "")
                 return;
 
-            _mvvm.Cοnnecting = true;
+            _mvvm.Loading = true;
 
             var username = UsernameTextBox.Text;
             var password = PasswordTextBox.Password; // todo hash password
@@ -30,7 +30,7 @@ namespace VehicleCheck.Views
 
             if (App.User != null)
             {
-                _mvvm.Cοnnecting = false;
+                _mvvm.Loading = false;
                 Frame.Navigate(typeof(MainPage));
             }
             else
@@ -41,7 +41,7 @@ namespace VehicleCheck.Views
                     CloseButtonText = "OK",
                 }.ShowAsync();
             }
-            _mvvm.Cοnnecting = false;
+            _mvvm.Loading = false;
         }
 
         private void SignUp_OnClick(object sender, RoutedEventArgs e)

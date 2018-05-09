@@ -18,7 +18,7 @@
     </Page.DataContext>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid Visibility="{Binding Cοnnecting, Converter={StaticResource InvBoolToVisibleConverter}}">
+        <Grid Visibility="{Binding Loading, Converter={StaticResource InvBoolToVisibleConverter}}">
             <Button Content="Sign Up" VerticalAlignment="Top" HorizontalAlignment="Right" Click="SignUp_OnClick"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
                 <Grid Margin="0, 2">
@@ -32,9 +32,9 @@
                 <Button Content="Sign In" Margin="0, 2" HorizontalAlignment="Stretch" Click="SignIn_OnClick"/>
             </StackPanel>
         </Grid>
-        <StackPanel Visibility="{Binding Cοnnecting, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing IsActive="True" Height="50" Width="50"/>
-            <TextBlock Text="Connecting..." FontSize="20"/>
+            <TextBlock Text="Loading..." FontSize="20"/>
         </StackPanel>
     </Grid>
 </Page>

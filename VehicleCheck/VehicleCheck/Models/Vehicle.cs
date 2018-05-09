@@ -10,10 +10,10 @@ namespace VehicleCheck.Models
         private string _name;
         private string _userId;
         private string _licensePlate;
-        private DateTime _insurance;
-        private DateTime _tax;
-        private DateTime _mot;
-        private DateTime _gasEmissionsCard;
+        private DateTimeOffset _insurance;
+        private DateTimeOffset _tax;
+        private DateTimeOffset _mot;
+        private DateTimeOffset _gasEmissionsCard;
 
         [JsonProperty("id")]
         public string Id
@@ -56,7 +56,7 @@ namespace VehicleCheck.Models
             }
         }
 
-        public DateTime Insurance
+        public DateTimeOffset Insurance
         {
             get { return _insurance; }
             set
@@ -66,7 +66,7 @@ namespace VehicleCheck.Models
             }
         }
 
-        public DateTime Tax
+        public DateTimeOffset Tax
         {
             get { return _tax; }
             set
@@ -76,7 +76,7 @@ namespace VehicleCheck.Models
             }
         }
 
-        public DateTime Mot
+        public DateTimeOffset Mot
         {
             get { return _mot; }
             set
@@ -86,7 +86,7 @@ namespace VehicleCheck.Models
             }
         }
 
-        public DateTime GasEmissionsCard
+        public DateTimeOffset GasEmissionsCard
         {
             get { return _gasEmissionsCard; }
             set

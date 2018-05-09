@@ -8,9 +8,9 @@ namespace VehicleCheckService.DataObjects
         public string Name { get; set; }
         public string UserId { get; set; }
         public string LicensePlate { get; set; }
-        public DateTime Insurance { get; set; }
-        public DateTime Tax { get; set; }
-        public DateTime Mot { get; set; }
-        public DateTime GasEmissionsCard { get; set; }
+        public DateTimeOffset Insurance { get; set; }
+        public DateTimeOffset Tax { get; set; }
+        public DateTimeOffset Mot { get; set; }
+        public DateTimeOffset GasEmissionsCard { get; set; }
     }
 }

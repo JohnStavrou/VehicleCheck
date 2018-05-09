@@ -7,16 +7,16 @@ namespace VehicleCheck.ViewModels
 {
     public class MainViewViewModel : INotifyPropertyChanged
     {
-        private bool _cοnnecting;
+        private bool _loading;
         private ObservableCollection<Vehicle> _vehicles;
 
-        public bool Cοnnecting
+        public bool Loading
         {
-            get { return _cοnnecting; }
+            get { return _loading; }
             set
             {
-                _cοnnecting = value;
-                OnPropertyChanged(nameof(Cοnnecting));
+                _loading = value;
+                OnPropertyChanged(nameof(Loading));
             }
         }
 

@@ -21,7 +21,7 @@
     </Page.DataContext>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid Visibility="{Binding Cοnnecting, Converter={StaticResource InvBoolToVisibleConverter}}">
+        <Grid Visibility="{Binding Loading, Converter={StaticResource InvBoolToVisibleConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -83,7 +83,7 @@
                         </DataTemplate>
                     </GridView.ItemTemplate>
                     <GridView.ContextFlyout>
-                        <MenuFlyout>
+                        <MenuFlyout x:Name="Fly">
                             <MenuFlyoutItem Text="Edit" Click="Edit_OnClick"/>
                             <MenuFlyoutItem Text="Delete" Click="Delete_OnClick"/>
                         </MenuFlyout>
@@ -91,7 +91,7 @@
                 </GridView>
             </ScrollViewer>
         </Grid>
-        <StackPanel Visibility="{Binding Cοnnecting, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing IsActive="True" Height="50" Width="50"/>
             <TextBlock Text="Fetching your vehicles..." FontSize="20"/>
         </StackPanel>

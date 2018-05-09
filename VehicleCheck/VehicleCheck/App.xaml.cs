@@ -37,28 +37,6 @@ namespace VehicleCheck
 
                 SyncUsers = Client.GetTable<User>();
                 SyncVehicles = Client.GetTable<Vehicle>();
-                /*
-                var user = new User
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Username = "John",
-                    Password = "1234"
-                };
-                await SyncUsers.InsertAsync(user);
-
-                var vehicle = new Vehicle
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Name = "Mazda",
-                    UserId = user.Id,
-                    LicensePlate = "rjng34g",
-                    Insurance = DateTime.Now,
-                    Tax = DateTime.Now,
-                    Mot = DateTime.Now,
-                    GasEmissionsCard = DateTime.Now
-                };
-                await SyncVehicles.InsertAsync(vehicle);
-                */
             }
             catch
             {
@@ -87,7 +65,6 @@ namespace VehicleCheck
                 if (rootFrame.Content == null)
                     rootFrame.Navigate(typeof(SignIn), e.Arguments);
 
-                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(10000, 200));
                 Window.Current.Activate();
             }
         }

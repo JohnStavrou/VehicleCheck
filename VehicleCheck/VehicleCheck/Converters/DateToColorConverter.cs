@@ -12,7 +12,7 @@ namespace VehicleCheck.Converters
             if (value == null)
                 return null;
 
-            if (DateTime.Compare((DateTime) value, DateTime.Now) > 0)
+            if (DateTimeOffset.Compare((DateTimeOffset) value, DateTimeOffset.Now) > 0)
                 return new SolidColorBrush(Colors.Red);
             return new SolidColorBrush(Colors.Green);
             //todo orange ena mina prin

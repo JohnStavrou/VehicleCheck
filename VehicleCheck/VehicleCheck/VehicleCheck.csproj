@@ -99,11 +99,11 @@
     <Compile Include="Converters\DateToColorConverter.cs" />
     <Compile Include="Converters\InvBoolToVisibleConverter.cs" />
     <Compile Include="Converters\DateToFormattedDateConverter.cs" />
+    <Compile Include="Views\AddVehicle.xaml.cs">
+      <DependentUpon>AddVehicle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NewUser.xaml.cs">
-      <DependentUpon>NewUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -134,11 +134,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\SignIn.xaml">
+    <Page Include="Views\AddVehicle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\NewUser.xaml">
+    <Page Include="Views\SignIn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
