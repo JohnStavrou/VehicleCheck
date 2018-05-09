@@ -1,6 +1,7 @@
 ﻿using System;
 using VehicleCheck.ViewModels;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using VehicleCheck.Models;
 
 namespace VehicleCheck.Views
@@ -8,6 +9,8 @@ namespace VehicleCheck.Views
     public sealed partial class AddVehicle
     {
         private readonly MainViewViewModel _mvvm;
+        private string _name;
+        private string _licensePlate;
 
         public AddVehicle()
         {
@@ -21,7 +24,38 @@ namespace VehicleCheck.Views
             Frame.GoBack();
         }
 
-        private async void Add_OnClick(object sender, RoutedEventArgs e)
+        private void NameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _name = NameTextBox.Text;
+            if (_name == "")
+                NameStar.Visibility = Visibility.Visible;
+            else
+                NameStar.Visibility = Visibility.Collapsed;
+            EnableButton();
+        }
+
+        private void LicensePlateTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _licensePlate = LicensePlateTextBox.Text;
+            if (_licensePlate == "")
+                LicensePlateStar.Visibility = Visibility.Visible;
+            else
+                LicensePlateStar.Visibility = Visibility.Collapsed;
+            EnableButton();
+        }
+
+        public void EnableButton()
+        {
+            if (NameStar.Visibility == Visibility.Collapsed &&
+                LicensePlateStar.Visibility == Visibility.Collapsed)
+            {
+                AddButton.IsEnabled = true;
+            }
+            else
+                AddButton.IsEnabled = false;
+        }
+
+        private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             _mvvm.Loading = true;
             var vehicle = new Vehicle
@@ -36,7 +70,7 @@ namespace VehicleCheck.Views
                 GasEmissionsCard = GasEmissionsCardDatePicker.Date
             };
             await App.SyncVehicles.InsertAsync(vehicle);
-            _mvvm.Loading = true;
+            _mvvm.Loading = false;
             Back_OnClick(sender, e);
         }
     }

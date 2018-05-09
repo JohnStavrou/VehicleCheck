@@ -9,9 +9,6 @@ namespace VehicleCheck.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null)
-                return null;
-
             if (DateTimeOffset.Compare((DateTimeOffset) value, DateTimeOffset.Now) > 0)
                 return new SolidColorBrush(Colors.Red);
             return new SolidColorBrush(Colors.Green);

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.Media.Playback;
 using VehicleCheck.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.WindowsAzure.MobileServices;
 using VehicleCheck.Models;
 
 namespace VehicleCheck.Views
@@ -29,18 +26,6 @@ namespace VehicleCheck.Views
         private void Back_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
-        }
-
-        public void EnableButton()
-        {
-            if (UsernameStar.Visibility == Visibility.Collapsed &&
-                PasswordStar.Visibility == Visibility.Collapsed &&
-                ConfirmPasswordStar.Visibility == Visibility.Collapsed)
-            {
-                SignUpButton.IsEnabled = true;
-            }
-            else
-                SignUpButton.IsEnabled = false;
         }
 
         private void UsernameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -71,6 +56,18 @@ namespace VehicleCheck.Views
             else
                 ConfirmPasswordStar.Visibility = Visibility.Collapsed;
             EnableButton();
+        }
+
+        public void EnableButton()
+        {
+            if (UsernameStar.Visibility == Visibility.Collapsed &&
+                PasswordStar.Visibility == Visibility.Collapsed &&
+                ConfirmPasswordStar.Visibility == Visibility.Collapsed)
+            {
+                SignUpButton.IsEnabled = true;
+            }
+            else
+                SignUpButton.IsEnabled = false;
         }
 
         private async void SignUpButton_OnClick(object sender, RoutedEventArgs e)

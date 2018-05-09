@@ -23,11 +23,13 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="450">
                 <Grid Margin="0, 2">
                     <TextBlock Text="Name" VerticalAlignment="Center"/>
-                    <TextBox x:Name="NameTextBox" HorizontalAlignment="Right" Width="296"/>
+                    <TextBox x:Name="NameTextBox" HorizontalAlignment="Right" Width="296" TextChanged="NameTextBox_OnTextChanged"/>
+                    <TextBlock x:Name="NameStar" Text="*" FontSize="20" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Width="15"/>
                 </Grid>
                 <Grid Margin="0, 2">
                     <TextBlock Text="License Plate" VerticalAlignment="Center"/>
-                    <TextBox x:Name="LicensePlateTextBox" HorizontalAlignment="Right" Width="296"/>
+                    <TextBox x:Name="LicensePlateTextBox" HorizontalAlignment="Right" Width="296" TextChanged="LicensePlateTextBox_OnTextChanged"/>
+                    <TextBlock x:Name="LicensePlateStar" Text="*" FontSize="20" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Width="15"/>
                 </Grid>
                 <Grid Margin="0, 2">
                     <TextBlock Text="Insurance" VerticalAlignment="Center"/>
@@ -45,7 +47,7 @@
                     <TextBlock Text="Gas Emissions Card" VerticalAlignment="Center"/>
                     <DatePicker x:Name="GasEmissionsCardDatePicker" HorizontalAlignment="Right"/>
                 </Grid>
-                <Button Content="Add" Margin="0, 2" HorizontalAlignment="Stretch" Click="Add_OnClick"/>
+                <Button x:Name="AddButton" Content="Add" Margin="0, 2" HorizontalAlignment="Stretch" Click="AddButton_OnClick" IsEnabled="False"/>
             </StackPanel>
         </Grid>
         <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using VehicleCheck.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,6 +8,8 @@ namespace VehicleCheck.Views
     public sealed partial class SignIn
     {
         private readonly MainViewViewModel _mvvm;
+        private string _username;
+        private string _password;
 
         public SignIn()
         {
@@ -16,17 +17,46 @@ namespace VehicleCheck.Views
 
             _mvvm = (MainViewViewModel) DataContext;
         }
-        
+
+        private void SignUp_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SignUp));
+        }
+
+        private void UsernameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _username = UsernameTextBox.Text;
+            EnableButton();
+        }
+
+        private void PasswordTextBox_OnTextChanged(object sender, RoutedEventArgs e)
+       {
+            _password = PasswordTextBox.Password;
+            EnableButton();
+        }
+
+        public void EnableButton()
+        {
+            if (_username == null || _password == null)
+            {
+                SignInButton.IsEnabled = false;
+                return;
+            }
+
+            if (_username != "" && _password != "")
+            {
+                SignInButton.IsEnabled = true;
+                return;
+            }
+
+            SignInButton.IsEnabled = false;
+        }
+
         private async void SignIn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (UsernameTextBox.Text == "" || PasswordTextBox.Password == "")
-                return;
-
             _mvvm.Loading = true;
 
-            var username = UsernameTextBox.Text;
-            var password = PasswordTextBox.Password; // todo hash password
-            App.User = (await App.SyncUsers.Where(x => x.Username == username && x.Password == password).ToListAsync()).FirstOrDefault();
+            App.User = (await App.SyncUsers.Where(x => x.Username == _username && x.Password == App.Hash(_password)).ToListAsync()).FirstOrDefault();
 
             if (App.User != null)
             {
@@ -34,19 +64,8 @@ namespace VehicleCheck.Views
                 Frame.Navigate(typeof(MainPage));
             }
             else
-            {
-                await new ContentDialog
-                {
-                    Content = "Incorrect username or password!",
-                    CloseButtonText = "OK",
-                }.ShowAsync();
-            }
+                Note.Text = "Incorrect username or password!";
             _mvvm.Loading = false;
-        }
-
-        private void SignUp_OnClick(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

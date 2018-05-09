@@ -23,13 +23,14 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
                 <Grid Margin="0, 2">
                     <TextBlock Text="Username" VerticalAlignment="Center"/>
-                    <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Right" Width="200"/>
+                    <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Right" Width="200"  TextChanged="UsernameTextBox_OnTextChanged"/>
                 </Grid>
                 <Grid Margin="0, 2">
                     <TextBlock Text="Password" VerticalAlignment="Center"/>
-                    <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Right" Width="200"/>
+                    <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Right" Width="200"  PasswordChanged="PasswordTextBox_OnTextChanged"/>
                 </Grid>
-                <Button Content="Sign In" Margin="0, 2" HorizontalAlignment="Stretch" Click="SignIn_OnClick"/>
+                <Button x:Name="SignInButton" Content="Sign In" Margin="0, 2" HorizontalAlignment="Stretch" Click="SignIn_OnClick" IsEnabled="False"/>
+                <TextBlock x:Name="Note" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">

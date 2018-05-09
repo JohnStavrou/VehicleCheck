@@ -7,9 +7,6 @@ namespace VehicleCheck.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null)
-                return null;
-
             return ((DateTimeOffset) value).ToString("dd/MM/yyyy");
         }
 
