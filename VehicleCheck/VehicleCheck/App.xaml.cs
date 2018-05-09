@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Text;
 using VehicleCheck.Models;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -43,7 +42,12 @@ namespace VehicleCheck
                 Console.WriteLine("Database Connection Error!");
             }
         }
-         
+
+        public static string Hash(string password)
+        {
+            return Encoding.UTF8.GetBytes(password).ToString();
+        }
+
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
