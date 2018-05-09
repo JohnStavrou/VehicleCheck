@@ -20,7 +20,7 @@
         <viewModels:MainViewViewModel/>
     </Page.DataContext>
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tapped="Grid_OnTapped">
         <Grid Visibility="{Binding Loading, Converter={StaticResource InvBoolToVisibleConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -82,12 +82,6 @@
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
-                    <GridView.ContextFlyout>
-                        <MenuFlyout x:Name="Fly">
-                            <MenuFlyoutItem Text="Edit" Click="Edit_OnClick"/>
-                            <MenuFlyoutItem Text="Delete" Click="Delete_OnClick"/>
-                        </MenuFlyout>
-                    </GridView.ContextFlyout>                
                 </GridView>
             </ScrollViewer>
         </Grid>
@@ -95,5 +89,11 @@
             <ProgressRing IsActive="True" Height="50" Width="50"/>
             <TextBlock Text="Fetching your vehicles..." FontSize="20"/>
         </StackPanel>
+        <FlyoutBase.AttachedFlyout>
+            <MenuFlyout x:Name="FlyOut">
+                <MenuFlyoutItem Text="Edit" Click="Edit_OnClick"/>
+                <MenuFlyoutItem Text="Delete" Click="Delete_OnClick"/>
+            </MenuFlyout>
+        </FlyoutBase.AttachedFlyout>
     </Grid>
 </Page>

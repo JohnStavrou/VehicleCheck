@@ -9,6 +9,7 @@ namespace VehicleCheck.Views
 {
     public sealed partial class MainPage
     {
+        private Vehicle _vehicle;
         private readonly MainViewViewModel _mvvm;
 
         public MainPage()
@@ -28,10 +29,12 @@ namespace VehicleCheck.Views
 
         private void GridView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (GridView.SelectedItem == null)
+            _vehicle = (Vehicle) GridView.SelectedItem;
+            if (_vehicle == null)
                 return;
 
-            GridView.SelectedItem = null;
+            var item = (UIElement) e.OriginalSource;
+            FlyOut.ShowAt(item, e.GetPosition(item));
         }
         
         private void AddVehicle_OnClick(object sender, RoutedEventArgs e)
@@ -49,25 +52,22 @@ namespace VehicleCheck.Views
             }.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
+            {
+                App.User = null;
                 Frame.GoBack();
+            }
         }
 
         private void Edit_OnClick(object sender, RoutedEventArgs e)
         {
-
+            GridView.SelectedItem = null;
         }
 
         private async void Delete_OnClick(object sender, RoutedEventArgs e)
         {
-            /*
-            var veh = (Vehicle) GridView.SelectedItem;
-            if (veh == null)
-                return;
-
-            var vehicle = (Vehicle) sender;
             var result = await new ContentDialog
             {
-                Content = "Are you sure you want delete vehicle " + vehicle.Name + "?",
+                Content = "Are you sure you want delete vehicle " + _vehicle.Name + "?",
                 CloseButtonText = "No",
                 PrimaryButtonText = "Yes"
             }.ShowAsync();
@@ -75,10 +75,16 @@ namespace VehicleCheck.Views
             if (result == ContentDialogResult.Primary)
             {
                 _mvvm.Loading = true;
-                await App.SyncVehicles.DeleteAsync(vehicle);
-                //_mvvm.Vehicles.Remove(vehicle);
+                await App.SyncVehicles.DeleteAsync(_vehicle);
+                _mvvm.Vehicles.Remove(_vehicle);
                 _mvvm.Loading = false;
-            }*/
+            }
+            GridView.SelectedItem = null;
+        }
+
+        private void Grid_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            GridView.SelectedItem = null;
         }
     }
 }
