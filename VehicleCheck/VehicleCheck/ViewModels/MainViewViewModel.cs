@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using VehicleCheck.Models;
@@ -8,16 +7,16 @@ namespace VehicleCheck.ViewModels
 {
     public class MainViewViewModel : INotifyPropertyChanged
     {
-        private bool _cοnnected;
+        private bool _cοnnecting;
         private ObservableCollection<Vehicle> _vehicles;
 
-        public bool Cοnnected
+        public bool Cοnnecting
         {
-            get { return _cοnnected; }
+            get { return _cοnnecting; }
             set
             {
-                _cοnnected = value;
-                OnPropertyChanged(nameof(Cοnnected));
+                _cοnnecting = value;
+                OnPropertyChanged(nameof(Cοnnecting));
             }
         }
 
@@ -34,7 +33,6 @@ namespace VehicleCheck.ViewModels
         public async Task FetchVehicleData()
         {
             Vehicles = new ObservableCollection<Vehicle>(await App.SyncVehicles.Where(x => x.UserId == App.User.Id).ToListAsync());
-            Cοnnected = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

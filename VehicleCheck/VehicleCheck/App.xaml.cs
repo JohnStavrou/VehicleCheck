@@ -29,7 +29,7 @@ namespace VehicleCheck
             Init();
         }
 
-        public async void Init()
+        public void Init()
         {
             try
             {
@@ -85,7 +85,7 @@ namespace VehicleCheck
             if (e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(SignIn), e.Arguments);
 
                 ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(10000, 200));
                 Window.Current.Activate();

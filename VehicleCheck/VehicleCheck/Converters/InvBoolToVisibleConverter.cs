@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace VehicleCheck.Converters
 {
-    public class InvConnectedToVisibleConverter : IValueConverter
+    public class InvBoolToVisibleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

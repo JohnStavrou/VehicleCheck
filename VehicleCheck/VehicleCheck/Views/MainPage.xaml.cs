@@ -16,11 +16,14 @@ namespace VehicleCheck.Views
             InitializeComponent();
 
             _mvvm = (MainViewViewModel) DataContext;
+            _mvvm.Cοnnecting = true;
+            Fetch();
         }
 
-        private void OnKeyDown(object sender, KeyRoutedEventArgs e)
+        public async void Fetch()
         {
-
+            await _mvvm.FetchVehicleData();
+            _mvvm.Cοnnecting = false;
         }
 
         private void GridView_Tapped(object sender, TappedRoutedEventArgs e)
@@ -31,34 +34,11 @@ namespace VehicleCheck.Views
             //(new MessageDialog(((Vehicle) GridView.SelectedItem).Name)).ShowAsync();
             GridView.SelectedItem = null;
         }
-
-        private async void SignIn_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (UsernameTextBox.Text == "")
-                return;
-
-            var username = UsernameTextBox.Text;
-            var password = PasswordTextBox.Password;
-
-            //loading
-            App.User = (await App.SyncUsers.Where(x => x.Username == username && x.Password == password).ToListAsync()).FirstOrDefault();
-
-            if(App.User != null)
-                await _mvvm.FetchVehicleData();
-            else
-            {
-                //kodikas efae akuro
-            }
-        }
-
-        private void SignUp_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
         
-        private void Add_OnClick(object sender, RoutedEventArgs e)
+        private void AddVehicle_OnClick(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(NewUser));
+            
         }
 
         private async void SignOut_OnClick(object sender, RoutedEventArgs e)
@@ -67,21 +47,22 @@ namespace VehicleCheck.Views
             {
                 Title = "Vehicle Check",
                 Content = "Are you sure you want to sign out of Vehicle Check?",
-                CloseButtonText = "Yes",
-                PrimaryButtonText = "No"
+                CloseButtonText = "No",
+                PrimaryButtonText = "Yes"
             }.ShowAsync();
 
-            if (result != ContentDialogResult.Primary)
-            {
-                _mvvm.Cοnnected = false;
-            }
+            if (result == ContentDialogResult.Primary)
+                Frame.GoBack();
         }
 
-        /*
-         public async Task VehicleFetchData()
+        private void Edit_OnClick(object sender, RoutedEventArgs e)
         {
-            Vehicles = await SyncVehicles.ToCollectionAsync();
+
         }
-        */
+
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
