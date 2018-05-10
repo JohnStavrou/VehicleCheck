@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
+    <Compile Include="Converters\DateToImageConverter.cs" />
     <Compile Include="Converters\DateToColorConverter.cs" />
     <Compile Include="Converters\InvBoolToVisibleConverter.cs" />
     <Compile Include="Converters\DateToFormattedDateConverter.cs" />
@@ -130,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\back.png" />
+    <Content Include="Assets\ok.png" />
+    <Content Include="Assets\warn.png" />
+    <Content Include="Assets\warnwhite.png" />
+    <Content Include="Assets\x.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -186,9 +191,7 @@
       <Version>6.0.8</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

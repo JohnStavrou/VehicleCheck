@@ -32,9 +32,9 @@ namespace VehicleCheck.Views
         {
             _username = UsernameTextBox.Text;
             if (_username == "")
-                UsernameStar.Visibility = Visibility.Visible;
+                UsernameError.Visibility = Visibility.Visible;
             else
-                UsernameStar.Visibility = Visibility.Collapsed;
+                UsernameError.Visibility = Visibility.Collapsed;
             EnableButton();
         }
 
@@ -42,9 +42,9 @@ namespace VehicleCheck.Views
         {
             _password = PasswordTextBox.Password;
             if (_password == "")
-                PasswordStar.Visibility = Visibility.Visible;
+                PasswordError.Visibility = Visibility.Visible;
             else
-                PasswordStar.Visibility = Visibility.Collapsed;
+                PasswordError.Visibility = Visibility.Collapsed;
             EnableButton();
         }
 
@@ -52,17 +52,17 @@ namespace VehicleCheck.Views
         {
             _confirmPassword = ConfirmPasswordTextBox.Password;
             if (_confirmPassword == "")
-                ConfirmPasswordStar.Visibility = Visibility.Visible;
+                ConfirmPasswordError.Visibility = Visibility.Visible;
             else
-                ConfirmPasswordStar.Visibility = Visibility.Collapsed;
+                ConfirmPasswordError.Visibility = Visibility.Collapsed;
             EnableButton();
         }
 
         public void EnableButton()
         {
-            if (UsernameStar.Visibility == Visibility.Collapsed &&
-                PasswordStar.Visibility == Visibility.Collapsed &&
-                ConfirmPasswordStar.Visibility == Visibility.Collapsed)
+            if (UsernameError.Visibility == Visibility.Collapsed &&
+                PasswordError.Visibility == Visibility.Collapsed &&
+                ConfirmPasswordError.Visibility == Visibility.Collapsed)
             {
                 SignUpButton.IsEnabled = true;
             }

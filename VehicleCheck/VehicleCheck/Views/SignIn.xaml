@@ -36,7 +36,7 @@
         </Grid>
         <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing IsActive="True" Height="50" Width="50" Foreground="White"/>
-            <TextBlock Text="Loading..." FontSize="20" Foreground="White" FontWeight="Medium"/>
+            <TextBlock Text="Signing you in..." FontSize="20" Foreground="White" FontWeight="Medium"/>
         </StackPanel>
     </Grid>
 </Page>

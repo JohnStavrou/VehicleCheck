@@ -7,12 +7,14 @@
     xmlns:converters="using:VehicleCheck.Converters" 
     xmlns:viewModels="using:VehicleCheck.ViewModels"
     xmlns:models="using:VehicleCheck.Models"
+    Background="#546E7A"
     mc:Ignorable="d">
 
     <Page.Resources>
         <converters:BoolToVisibleConverter x:Name="BoolToVisibleConverter"/>
         <converters:DateToColorConverter x:Name="DateToColorConverter"/>
         <converters:DateToFormattedDateConverter x:Name="DateToFormattedDateConverter"/>
+        <converters:DateToImageConverter x:Name="DateToImageConverter"/>
         <converters:InvBoolToVisibleConverter x:Name="InvBoolToVisibleConverter"/>
     </Page.Resources>
     
@@ -28,17 +30,14 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <Button Content="Add Vehicle" HorizontalAlignment="Left" Click="AddVehicle_OnClick"/>
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Content="Settings" Margin="5, 0"/>
-                    <Button Content="Sign Out" Click="SignOut_OnClick"/>
-                </StackPanel>
+                <Button Content="Add Vehicle" Foreground="White" FontWeight="Medium" HorizontalAlignment="Left" Click="AddVehicle_OnClick" Background="#37474F" Height="30" Width="100" BorderThickness="0"/>
+                <Button Content="Sign Out" Foreground="White" FontWeight="Medium" HorizontalAlignment="Right" Click="SignOut_OnClick" Background="#37474F" Height="30" Width="100" BorderThickness="0"/>
             </Grid>
 
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <GridView x:Name="GridView" ItemsSource="{Binding Vehicles}" FontSize="20" Tapped="GridView_Tapped" Width="1200">
+                <GridView x:Name="GridView" ItemsSource="{Binding Vehicles}" FontSize="20" Tapped="GridView_Tapped" Width="1220">
                     <GridView.Header>
-                        <Grid>
+                        <Grid Background="#37474F" Margin="0, 10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -48,46 +47,58 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="License Plate" TextAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="Insurance" TextAlignment="Center"/>
-                            <TextBlock Grid.Column="3" Text="Tax" TextAlignment="Center"/>
-                            <TextBlock Grid.Column="4" Text="MOT" TextAlignment="Center"/>
-                            <TextBlock Grid.Column="5" Text="Gas Emissions Card" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="0" Width="200" Text="Name" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Width="200" Text="License Plate" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Width="200" Text="Insurance" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Width="200" Text="Tax" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Width="200" Text="MOT" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="5" Width="200" Text="Gas Emissions Card" Foreground="White" FontWeight="Medium" TextAlignment="Center"/>
                         </Grid>
                     </GridView.Header>
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="models:Vehicle">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid Background="White" Height="50" Margin="0, 2">
+                                <Grid VerticalAlignment="Center" BorderThickness="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Width="200" Text="{x:Bind Name}" FontWeight="Bold" TextAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Width="200" Text="{x:Bind LicensePlate}" FontWeight="Bold" TextAlignment="Center"/>
-                                <Border Grid.Column="2" Width="200" Background="{Binding Insurance, Converter={StaticResource DateToColorConverter}}">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Insurance, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Basetime, Converter={StaticResource IntToStringConverter}}"/>
-                                            <TextBlock Text="remaining"/>
+                                    <Border Grid.Column="0" Width="200" Height="40">
+                                        <TextBlock Text="{x:Bind Name}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border Grid.Column="1" Width="200" Height="40">
+                                        <TextBlock Text="{x:Bind LicensePlate}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border Grid.Column="2" Width="200" Background="{Binding Insurance, Converter={StaticResource DateToColorConverter}}" Height="40" CornerRadius="10" >
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Insurance, Converter={StaticResource DateToFormattedDateConverter}}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                            <Image Source="{Binding Insurance, Converter={StaticResource DateToImageConverter}}" Height="20" Margin="10, 0, 0, 0"/>
                                         </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="3" Width="200" Background="{Binding Tax, Converter={StaticResource DateToColorConverter}}">
-                                    <TextBlock Text="{Binding Tax, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
-                                </Border>
-                                <Border Grid.Column="4" Width="200" Background="{Binding Mot, Converter={StaticResource DateToColorConverter}}">
-                                    <TextBlock Text="{Binding Mot, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
-                                </Border>
-                                <Border Grid.Column="5" Width="200" Background="{Binding GasEmissionsCard, Converter={StaticResource DateToColorConverter}}">
-                                    <TextBlock Text="{Binding GasEmissionsCard, Converter={StaticResource DateToFormattedDateConverter}}" FontWeight="Bold" TextAlignment="Center"/>
-                                </Border>
+                                    </Border>
+                                    <Border Grid.Column="3" Width="200" Background="{Binding Tax, Converter={StaticResource DateToColorConverter}}" Height="40" CornerRadius="10" Margin="4, 0">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Tax, Converter={StaticResource DateToFormattedDateConverter}}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                            <Image Source="{Binding Tax, Converter={StaticResource DateToImageConverter}}" Height="20" Margin="10, 0, 0, 0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="4" Width="200" Background="{Binding Mot, Converter={StaticResource DateToColorConverter}}" Height="40" CornerRadius="10">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Mot, Converter={StaticResource DateToFormattedDateConverter}}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                            <Image Source="{Binding Mot, Converter={StaticResource DateToImageConverter}}" Height="20" Margin="10, 0, 0, 0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="5" Width="200" Background="{Binding GasEmissionsCard, Converter={StaticResource DateToColorConverter}}" Height="40" CornerRadius="10" Margin="4, 0">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding GasEmissionsCard, Converter={StaticResource DateToFormattedDateConverter}}" FontSize="19" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                            <Image Source="{Binding GasEmissionsCard, Converter={StaticResource DateToImageConverter}}" Height="20" Margin="10, 0, 0, 0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -95,8 +106,8 @@
             </ScrollViewer>
         </Grid>
         <StackPanel Visibility="{Binding Loading, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ProgressRing IsActive="True" Height="50" Width="50"/>
-            <TextBlock Text="Fetching your vehicles..." FontSize="20"/>
+            <ProgressRing IsActive="True" Height="50" Width="50" Foreground="White"/>
+            <TextBlock Text="Fetching your vehicles..." FontSize="20" Foreground="White" FontWeight="Medium"/>
         </StackPanel>
         <FlyoutBase.AttachedFlyout>
             <MenuFlyout x:Name="FlyOut">
