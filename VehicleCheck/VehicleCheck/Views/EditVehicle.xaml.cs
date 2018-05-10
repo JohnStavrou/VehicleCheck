@@ -29,9 +29,9 @@ namespace VehicleCheck.Views
         {
             _name = NameTextBox.Text;
             if (_name == "")
-                NameStar.Visibility = Visibility.Visible;
+                NameError.Visibility = Visibility.Visible;
             else
-                NameStar.Visibility = Visibility.Collapsed;
+                NameError.Visibility = Visibility.Collapsed;
             EnableButton();
         }
 
@@ -39,16 +39,16 @@ namespace VehicleCheck.Views
         {
             _licensePlate = LicensePlateTextBox.Text;
             if (_licensePlate == "")
-                LicensePlateStar.Visibility = Visibility.Visible;
+                LicensePlateError.Visibility = Visibility.Visible;
             else
-                LicensePlateStar.Visibility = Visibility.Collapsed;
+                LicensePlateError.Visibility = Visibility.Collapsed;
             EnableButton();
         }
 
         public void EnableButton()
         {
-            if (NameStar.Visibility == Visibility.Collapsed &&
-                LicensePlateStar.Visibility == Visibility.Collapsed)
+            if (NameError.Visibility == Visibility.Collapsed &&
+                LicensePlateError.Visibility == Visibility.Collapsed)
             {
                 SaveButton.IsEnabled = true;
             }
