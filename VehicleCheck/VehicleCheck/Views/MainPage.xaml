@@ -13,7 +13,6 @@
         <converters:BoolToVisibleConverter x:Name="BoolToVisibleConverter"/>
         <converters:DateToColorConverter x:Name="DateToColorConverter"/>
         <converters:DateToFormattedDateConverter x:Name="DateToFormattedDateConverter"/>
-        <converters:IntToStringConverter x:Name="IntToStringConverter"/>
         <converters:InvBoolToVisibleConverter x:Name="InvBoolToVisibleConverter"/>
     </Page.Resources>
     

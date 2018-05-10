@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:VehicleCheck.ViewModels"
     xmlns:converters="using:VehicleCheck.Converters"
+    Background="#546E7A"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -19,7 +20,9 @@
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Visibility="{Binding Loading, Converter={StaticResource InvBoolToVisibleConverter}}">
-            <Button Content="Back" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_OnClick"/>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_OnClick" Height="30" Width="50" Background="Transparent" BorderThickness="0">
+                <Image Source="../Assets/back.png"/>
+            </Button>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
                 <Grid Margin="0, 2">
                     <TextBlock Text="Name" VerticalAlignment="Center"/>

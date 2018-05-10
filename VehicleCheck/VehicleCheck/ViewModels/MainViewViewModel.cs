@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using VehicleCheck.Models;
 
 namespace VehicleCheck.ViewModels
@@ -11,7 +9,6 @@ namespace VehicleCheck.ViewModels
     {
         private bool _loading;
         private ObservableCollection<Vehicle> _vehicles;
-        private Vehicle _vehicle;
 
         public bool Loading
         {
@@ -36,26 +33,7 @@ namespace VehicleCheck.ViewModels
         public async Task FetchVehicleData()
         {
             Vehicles = new ObservableCollection<Vehicle>(await App.SyncVehicles.Where(x => x.UserId == App.User.Id).ToListAsync());
-            /*foreach (var vehicle in Vehicles)
-            {
-                Task.Run(() =>
-                {
-                    _vehicle = vehicle;
-                    vehicle.Timer = new DispatcherTimer();
-                    vehicle.Timer.Interval = new TimeSpan(0, 0, 1);
-                    vehicle.Basetime = 60;
-                    vehicle.Timer.Tick += Timer_Tick;
-                    vehicle.Timer.Start();
-                });
-            }*/
         }
-        /*
-        private void Timer_Tick(object sender, object e)
-        {
-            _vehicle.Basetime--;
-            if (_vehicle.Basetime == 0)
-                _vehicle.Timer.Stop();
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
 
