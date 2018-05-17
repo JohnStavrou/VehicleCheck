@@ -21,8 +21,8 @@ namespace VehicleCheckService.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
-                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
-                    "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>
+                    ("ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
     }
 }

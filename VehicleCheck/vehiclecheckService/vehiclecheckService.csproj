@@ -146,6 +146,15 @@
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\Vehicle.cs" />
+    <Compile Include="Migrations\201805170023264_InitialCreate.cs" />
+    <Compile Include="Migrations\201805170023264_InitialCreate.Designer.cs">
+      <DependentUpon>201805170023264_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805170027429_AddEmail.cs" />
+    <Compile Include="Migrations\201805170027429_AddEmail.Designer.cs">
+      <DependentUpon>201805170027429_AddEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\VehicleCheckContext.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,6 +174,14 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\VehicleCheck - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\VehicleCheck - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805170023264_InitialCreate.resx">
+      <DependentUpon>201805170023264_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805170027429_AddEmail.resx">
+      <DependentUpon>201805170027429_AddEmail.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

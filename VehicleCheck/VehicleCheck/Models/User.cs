@@ -8,6 +8,7 @@ namespace VehicleCheck.Models
         private string _id;
         private string _username;
         private string _password;
+        private string _email;
 
         [JsonProperty("id")]
         public string Id
@@ -37,6 +38,16 @@ namespace VehicleCheck.Models
             {
                 _password = value;
                 OnPropertyChanged("Password");
+            }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                OnPropertyChanged("Email");
             }
         }
 
